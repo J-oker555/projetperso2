@@ -55,10 +55,20 @@ def main(max_trials=15, seed=42):
         seed=seed,
     )
     early_stop = keras.callbacks.EarlyStopping(monitor="val_loss", patience=20, restore_best_weights=True)
-    tuner.search(x_train, y_train, validation_split=0.2, epochs=120, batch_size=32, callbacks=[early_stop])
+    tuner.search(
+        x_train,
+        y_train,
+        validation_split=0.2,
+        epochs=120,
+        batch_size=32,
+        callbacks=[early_stop],
+        verbose=0,
+    )
     tuner.results_summary(5)
+    best_hp = tuner.get_best_hyperparameters(1)[0]
+    print("Best hyperparameters:", best_hp.values)
     best_model = tuner.get_best_models(1)[0]
-    print("Best test metrics:", best_model.evaluate(x_test, y_test, verbose=0))
+    print("Best test metrics:", best_model.evaluate(x_test, y_test, verbose=0, return_dict=True))
 
 
 if __name__ == "__main__":

@@ -44,7 +44,8 @@ def run(optimizer="adam"):
     x_train, x_test, y_train, y_test, names = load_personal_dataset()
     print("Target names:", names)
     print("Train class distribution:", np.bincount(y_train))
-    log_dir = f"logs/custom/breast_cancer_{optimizer}_{datetime.datetime.now().strftime('%H%M%S')}"
+    optimizer_name = optimizer if isinstance(optimizer, str) else optimizer.name
+    log_dir = f"logs/custom/breast_cancer_{optimizer_name}_{datetime.datetime.now().strftime('%H%M%S')}"
     callbacks = [
         keras.callbacks.TensorBoard(log_dir=log_dir),
         keras.callbacks.EarlyStopping(monitor="val_loss", patience=20, restore_best_weights=True),
@@ -61,7 +62,7 @@ def run(optimizer="adam"):
     )
     loss, accuracy = model.evaluate(x_test, y_test, verbose=0)
     extreme = np.full((1, x_train.shape[1]), 99999.0)
-    print(f"{optimizer}: test_accuracy={accuracy:.4f}, epochs={len(history.history['loss'])}, log_dir={log_dir}")
+    print(f"{optimizer_name}: test_accuracy={accuracy:.4f}, epochs={len(history.history['loss'])}, log_dir={log_dir}")
     print("Extreme out-of-distribution prediction:", model.predict(extreme, verbose=0).ravel())
 
 

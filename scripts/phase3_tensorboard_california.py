@@ -6,6 +6,7 @@ train_loss for long periods, re-check preprocessing and leakage.
 """
 
 import datetime
+from pathlib import Path
 
 from sklearn.datasets import fetch_california_housing
 from sklearn.model_selection import train_test_split
@@ -34,7 +35,8 @@ def train_with_tensorboard(x_train, y_train, x_val, y_val, run_name, epochs=100)
 
 
 def main():
-    data = fetch_california_housing()
+    data_home = Path(__file__).resolve().parents[1] / "data" / "sklearn"
+    data = fetch_california_housing(data_home=data_home)
     x_train, x_val, y_train, y_val = train_test_split(
         data.data, data.target, test_size=0.2, random_state=42
     )

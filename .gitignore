@@ -4,5 +4,6 @@ __pycache__/
 venv/
 logs/
 kt_dir/
+data/sklearn/
 *.keras
 *.h5

@@ -5,13 +5,16 @@ Fitting the scaler before the split leaks information from validation/test
 distributions into training preprocessing and makes evaluation optimistic.
 """
 
+from pathlib import Path
+
 from sklearn.datasets import fetch_california_housing
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 
 def load_california_pipeline(random_state=42):
-    data = fetch_california_housing()
+    data_home = Path(__file__).resolve().parents[1] / "data" / "sklearn"
+    data = fetch_california_housing(data_home=data_home)
     x_train_full, x_test, y_train_full, y_test = train_test_split(
         data.data, data.target, test_size=0.2, random_state=random_state
     )

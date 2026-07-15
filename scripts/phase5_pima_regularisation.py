@@ -48,10 +48,10 @@ def main(epochs=300):
         epochs=epochs,
         batch_size=32,
         callbacks=[early_stop],
-        verbose=1,
+        verbose=0,
     )
-    results = model.evaluate(x_test, y_test, verbose=0)
-    print(dict(zip(model.metrics_names, results)))
+    results = model.evaluate(x_test, y_test, verbose=0, return_dict=True)
+    print(results)
     print("Epochs run:", len(history.history["loss"]))
     return history
 
