@@ -26,6 +26,14 @@ pip install -r requirements.txt
 
 ## Scripts
 
+Dataset-level entry points:
+
+- `scripts/california_housing_project.py` : runner complet California Housing.
+- `scripts/pima_diabetes_project.py` : runner complet Pima Diabetes.
+- `scripts/wine_quality_project.py` : runner complet Wine Quality.
+
+Phase-level scripts:
+
 - `scripts/phase1_pipeline_california.py` : split et normalisation propre de California Housing.
 - `scripts/phase2_baseline_regression.py` : baseline PMC de regression.
 - `scripts/phase3_tensorboard_california.py` : comparaison TensorBoard avec et sans normalisation.
@@ -41,6 +49,8 @@ TensorBoard :
 ```bash
 tensorboard --logdir logs
 ```
+
+La revue de conformite detaillee est dans `reports/compliance.md`.
 
 ## Hypotheses avant tableau comparatif
 
